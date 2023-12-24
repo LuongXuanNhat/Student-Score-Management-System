@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Project_62130516.Models.Lop>
+
+@{
+    ViewBag.Title = "Quản lý lớp học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý lớp học</h2>
+
+<p>
+    @Html.ActionLink("Thêm lớp", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên lớp
+        </th>
+        <th>
+            Số sinh viên
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SinhViens.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaLop }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaLop }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaLop })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,51 @@
+﻿@model Project_62130516.Models.BangDiem
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BangDiem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DiemQT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiemQT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiemThi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiemThi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HocPhan.MaMon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HocPhan.MaMon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SinhVien.TenSV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SinhVien.TenSV)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

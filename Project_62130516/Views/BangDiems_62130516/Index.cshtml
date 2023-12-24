@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Project_62130516.Models.BangDiem>
+@string.Format("{0:n0}", Model)
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<button class="float-end btn btn-primary text-white">
+    <a class="text-white text-decoration-none" href="@Url.Action("Create")">Nhập điểm</a>
+</button>
+<table class="table">
+    <tr>
+        <th>
+            Mã sinh viên
+        </th>
+        <th>
+            Tên sinh viên
+        </th>
+        <th>
+            Lớp
+        </th>
+        <th>
+            Mã học phần
+        </th>
+        <th>
+            Tên môn học
+        </th>
+        <th>
+            Điểm quá trình
+        </th>
+        <th>
+            Điểm thi
+        </th>
+        <th>
+            Điểm tổng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SinhVien.MaSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SinhVien.TenSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SinhVien.Lop.TenLop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocPhan.MaHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocPhan.MonHoc.TenMon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiemQT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiemThi)
+            </td>
+            <td>
+                @string.Format("{0:n0}", item.DiemTong)
+            </td>
+
+
+            <td>
+                <button class="btn btn-warning">
+                    <a class="text-white text-decoration-none" href="@Url.Action("Edit", new { id = item.Id })">Sửa</a>
+                </button>
+                |
+                <button class="btn btn-info">
+                    <a class="text-white text-decoration-none" href="@Url.Action("Details", new { id = item.Id })">Chi tiết</a>
+                </button>
+                |
+                <button class="btn btn-danger">
+                    <a class="text-white text-decoration-none" href="@Url.Action("Delete", new { id = item.Id })">Xóa</a>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

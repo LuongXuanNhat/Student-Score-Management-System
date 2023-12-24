@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Project_62130516.Models.GiangVien>
+
+@{
+    ViewBag.Title = "Quản lý giảng viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý giảng viên</h2>
+
+<p >
+    @Html.ActionLink("Thêm giảng viên", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã số giảng viên
+        </th>
+        <th>
+            Tên giảng viên
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Trạng thái tài khoản
+        </th>
+        <th>
+            Tên đăng nhập
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaGV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenGV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @if (!item.DaXoa)
+            {
+                <text>🟢 Đang hoạt động</text>
+            }
+            else
+            {
+                <text>🔴 Đã khóa</text>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.TenDangNhap)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaGV }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaGV }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaGV })
+        </td>
+    </tr>
+}
+
+</table>

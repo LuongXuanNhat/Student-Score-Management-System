@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Project_62130516.Models.HocPhan>
+
+@{
+    ViewBag.Title = "Quản lý học phần";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý học phần</h2>
+
+<p>
+    @Html.ActionLink("Thêm học phần", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã học phần
+        </th>
+        <th>
+            Tên giảng viên đứng lớp
+        </th>
+        <th>
+            Tên môn học
+        </th>
+        <th>
+            Số lượng học sinh
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaHP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiangVien.TenGV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MonHoc.TenMon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BangDiems.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaHP }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaHP }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaHP })
+        </td>
+    </tr>
+}
+
+</table>

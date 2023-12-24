@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Project_62130516.Models.PhanQuyen>
+
+@{
+    ViewBag.Title = "Quản lý quyền";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách quyền</h2>
+
+<p>
+    @Html.ActionLink("Thêm quyền", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên quyền
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenQuyen)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

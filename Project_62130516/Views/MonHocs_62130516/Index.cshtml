@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Project_62130516.Models.MonHoc>
+
+@{
+    ViewBag.Title = "Môn học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý môn học</h2>
+
+<p>
+    @Html.ActionLink("Thêm môn học", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên môn học
+        </th>
+        <th>
+            Số tín chỉ
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenMon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoTinChi)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaMH }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaMH }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaMH })
+        </td>
+    </tr>
+}
+
+</table>

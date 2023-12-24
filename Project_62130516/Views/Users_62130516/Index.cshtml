@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Project_62130516.Models.User>
+
+@{
+    ViewBag.Title = "Danh sách người dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách người dùng</h2>
+
+<p>
+    @Html.ActionLink("Tạo tài khoản", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã số
+        </th>
+        <th>
+            Tên đăng nhập
+        </th>
+        <th>
+            Quyền
+        </th>
+        <th>
+            Mật khẩu
+        </th>
+        <th>
+            Trạng thái tài khoản
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDangNhap)
+        </td>
+        <td>
+            @if (item.TenQuyen == null)
+            {
+                <text>-Chưa set-</text>
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.TenQuyen)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @if (!item.DaXoa)
+            {
+                <text>🟢 Đang hoạt động</text>
+            }
+            else
+            {
+                <text>🔴 Đã khóa</text>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,35 @@
+﻿@model Project_62130516.Models.HocPhan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HocPhan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GiangVien.TenGV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiangVien.TenGV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonHoc.TenMon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonHoc.TenMon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaHP }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

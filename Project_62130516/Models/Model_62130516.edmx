@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Project_62130516Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BangDiem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MaSV" Type="varchar" MaxLength="100" />
+          <Property Name="MaMH" Type="varchar" MaxLength="100" />
+          <Property Name="DiemQT" Type="float" />
+          <Property Name="DiemThi" Type="float" />
+          <Property Name="DiemTong" Type="float" />
+        </EntityType>
+        <EntityType Name="GiangVien">
+          <Key>
+            <PropertyRef Name="MaGV" />
+          </Key>
+          <Property Name="MaGV" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenGV" Type="nvarchar" MaxLength="255" />
+          <Property Name="SDT" Type="varchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="DaXoa" Type="bit" />
+        </EntityType>
+        <EntityType Name="HocPhan">
+          <Key>
+            <PropertyRef Name="MaHP" />
+          </Key>
+          <Property Name="MaHP" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaMon" Type="varchar" MaxLength="100" />
+          <Property Name="MaGV" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Lop">
+          <Key>
+            <PropertyRef Name="MaLop" />
+          </Key>
+          <Property Name="MaLop" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenLop" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="MaMH" />
+          </Key>
+          <Property Name="MaMH" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenMon" Type="nvarchar" MaxLength="255" />
+          <Property Name="SoTinChi" Type="float" />
+        </EntityType>
+        <EntityType Name="PhanQuyen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenQuyen" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PhanQuyenTaiKhoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" />
+          <Property Name="MaQuyen" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="MaSV" />
+          </Key>
+          <Property Name="MaSV" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenSV" Type="nvarchar" MaxLength="255" />
+          <Property Name="SDT" Type="varchar" MaxLength="11" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaLop" Type="uniqueidentifier" />
+          <Property Name="DaXoa" Type="bit" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenDangNhap" Type="varchar" MaxLength="100" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="100" />
+          <Property Name="DaXoa" Type="bit" />
+        </EntityType>
+        <Association Name="FK__BangDiem__MaMH__49C3F6B7">
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="0..1" />
+          <End Role="BangDiem" Type="Self.BangDiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HocPhan">
+              <PropertyRef Name="MaHP" />
+            </Principal>
+            <Dependent Role="BangDiem">
+              <PropertyRef Name="MaMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BangDiem__MaSV__48CFD27E">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
+          <End Role="BangDiem" Type="Self.BangDiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="MaSV" />
+            </Principal>
+            <Dependent Role="BangDiem">
+              <PropertyRef Name="MaSV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GiangVien__MaGV__46E78A0C">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GiangVien">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HocPhan__MaGV__4BAC3F29">
+          <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="0..1" />
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangVien">
+              <PropertyRef Name="MaGV" />
+            </Principal>
+            <Dependent Role="HocPhan">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HocPhan__MaMon__4AB81AF0">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="MaMH" />
+            </Principal>
+            <Dependent Role="HocPhan">
+              <PropertyRef Name="MaMon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanQuyen__MaQuy__4D94879B">
+          <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
+          <End Role="PhanQuyenTaiKhoan" Type="Self.PhanQuyenTaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQuyen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhanQuyenTaiKhoan">
+              <PropertyRef Name="MaQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanQuyen__UserI__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PhanQuyenTaiKhoan" Type="Self.PhanQuyenTaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhanQuyenTaiKhoan">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__MaLop__47DBAE45">
+          <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lop">
+              <PropertyRef Name="MaLop" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="MaLop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_62130516ModelStoreContainer">
+          <EntitySet Name="BangDiem" EntityType="Self.BangDiem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiangVien" EntityType="Self.GiangVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HocPhan" EntityType="Self.HocPhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lop" EntityType="Self.Lop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanQuyenTaiKhoan" EntityType="Self.PhanQuyenTaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BangDiem__MaMH__49C3F6B7" Association="Self.FK__BangDiem__MaMH__49C3F6B7">
+            <End Role="HocPhan" EntitySet="HocPhan" />
+            <End Role="BangDiem" EntitySet="BangDiem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BangDiem__MaSV__48CFD27E" Association="Self.FK__BangDiem__MaSV__48CFD27E">
+            <End Role="SinhVien" EntitySet="SinhVien" />
+            <End Role="BangDiem" EntitySet="BangDiem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GiangVien__MaGV__46E78A0C" Association="Self.FK__GiangVien__MaGV__46E78A0C">
+            <End Role="User" EntitySet="User" />
+            <End Role="GiangVien" EntitySet="GiangVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HocPhan__MaGV__4BAC3F29" Association="Self.FK__HocPhan__MaGV__4BAC3F29">
+            <End Role="GiangVien" EntitySet="GiangVien" />
+            <End Role="HocPhan" EntitySet="HocPhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HocPhan__MaMon__4AB81AF0" Association="Self.FK__HocPhan__MaMon__4AB81AF0">
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="HocPhan" EntitySet="HocPhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanQuyen__MaQuy__4D94879B" Association="Self.FK__PhanQuyen__MaQuy__4D94879B">
+            <End Role="PhanQuyen" EntitySet="PhanQuyen" />
+            <End Role="PhanQuyenTaiKhoan" EntitySet="PhanQuyenTaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanQuyen__UserI__4CA06362" Association="Self.FK__PhanQuyen__UserI__4CA06362">
+            <End Role="User" EntitySet="User" />
+            <End Role="PhanQuyenTaiKhoan" EntitySet="PhanQuyenTaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__MaLop__47DBAE45" Association="Self.FK__SinhVien__MaLop__47DBAE45">
+            <End Role="Lop" EntitySet="Lop" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Project_62130516Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BangDiem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MaSV" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaMH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DiemQT" Type="Double" />
+          <Property Name="DiemThi" Type="Double" />
+          <Property Name="DiemTong" Type="Double" />
+          <NavigationProperty Name="HocPhan" Relationship="Self.FK__BangDiem__MaMH__49C3F6B7" FromRole="BangDiem" ToRole="HocPhan" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK__BangDiem__MaSV__48CFD27E" FromRole="BangDiem" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="GiangVien">
+          <Key>
+            <PropertyRef Name="MaGV" />
+          </Key>
+          <Property Name="MaGV" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenGV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="DaXoa" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="Self.FK__GiangVien__MaGV__46E78A0C" FromRole="GiangVien" ToRole="User" />
+          <NavigationProperty Name="HocPhans" Relationship="Self.FK__HocPhan__MaGV__4BAC3F29" FromRole="GiangVien" ToRole="HocPhan" />
+        </EntityType>
+        <EntityType Name="HocPhan">
+          <Key>
+            <PropertyRef Name="MaHP" />
+          </Key>
+          <Property Name="MaHP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaMon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaGV" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BangDiems" Relationship="Self.FK__BangDiem__MaMH__49C3F6B7" FromRole="HocPhan" ToRole="BangDiem" />
+          <NavigationProperty Name="GiangVien" Relationship="Self.FK__HocPhan__MaGV__4BAC3F29" FromRole="HocPhan" ToRole="GiangVien" />
+          <NavigationProperty Name="MonHoc" Relationship="Self.FK__HocPhan__MaMon__4AB81AF0" FromRole="HocPhan" ToRole="MonHoc" />
+        </EntityType>
+        <EntityType Name="Lop">
+          <Key>
+            <PropertyRef Name="MaLop" />
+          </Key>
+          <Property Name="MaLop" Type="Guid" Nullable="false" />
+          <Property Name="TenLop" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__MaLop__47DBAE45" FromRole="Lop" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="MaMH" />
+          </Key>
+          <Property Name="MaMH" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenMon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SoTinChi" Type="Double" />
+          <NavigationProperty Name="HocPhans" Relationship="Self.FK__HocPhan__MaMon__4AB81AF0" FromRole="MonHoc" ToRole="HocPhan" />
+        </EntityType>
+        <EntityType Name="PhanQuyen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="TenQuyen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PhanQuyenTaiKhoans" Relationship="Self.FK__PhanQuyen__MaQuy__4D94879B" FromRole="PhanQuyen" ToRole="PhanQuyenTaiKhoan" />
+        </EntityType>
+        <EntityType Name="PhanQuyenTaiKhoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaQuyen" Type="Guid" />
+          <NavigationProperty Name="PhanQuyen" Relationship="Self.FK__PhanQuyen__MaQuy__4D94879B" FromRole="PhanQuyenTaiKhoan" ToRole="PhanQuyen" />
+          <NavigationProperty Name="User" Relationship="Self.FK__PhanQuyen__UserI__4CA06362" FromRole="PhanQuyenTaiKhoan" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="MaSV" />
+          </Key>
+          <Property Name="MaSV" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenSV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaLop" Type="Guid" />
+          <Property Name="DaXoa" Type="Boolean" />
+          <NavigationProperty Name="BangDiems" Relationship="Self.FK__BangDiem__MaSV__48CFD27E" FromRole="SinhVien" ToRole="BangDiem" />
+          <NavigationProperty Name="Lop" Relationship="Self.FK__SinhVien__MaLop__47DBAE45" FromRole="SinhVien" ToRole="Lop" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenDangNhap" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DaXoa" Type="Boolean" />
+          <NavigationProperty Name="GiangVien" Relationship="Self.FK__GiangVien__MaGV__46E78A0C" FromRole="User" ToRole="GiangVien" />
+          <NavigationProperty Name="PhanQuyenTaiKhoans" Relationship="Self.FK__PhanQuyen__UserI__4CA06362" FromRole="User" ToRole="PhanQuyenTaiKhoan" />
+        </EntityType>
+        <Association Name="FK__BangDiem__MaMH__49C3F6B7">
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="0..1" />
+          <End Role="BangDiem" Type="Self.BangDiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HocPhan">
+              <PropertyRef Name="MaHP" />
+            </Principal>
+            <Dependent Role="BangDiem">
+              <PropertyRef Name="MaMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BangDiem__MaSV__48CFD27E">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
+          <End Role="BangDiem" Type="Self.BangDiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="MaSV" />
+            </Principal>
+            <Dependent Role="BangDiem">
+              <PropertyRef Name="MaSV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GiangVien__MaGV__46E78A0C">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GiangVien">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HocPhan__MaGV__4BAC3F29">
+          <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="0..1" />
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangVien">
+              <PropertyRef Name="MaGV" />
+            </Principal>
+            <Dependent Role="HocPhan">
+              <PropertyRef Name="MaGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HocPhan__MaMon__4AB81AF0">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+          <End Role="HocPhan" Type="Self.HocPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="MaMH" />
+            </Principal>
+            <Dependent Role="HocPhan">
+              <PropertyRef Name="MaMon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SinhVien__MaLop__47DBAE45">
+          <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lop">
+              <PropertyRef Name="MaLop" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="MaLop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanQuyen__MaQuy__4D94879B">
+          <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
+          <End Role="PhanQuyenTaiKhoan" Type="Self.PhanQuyenTaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhanQuyen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhanQuyenTaiKhoan">
+              <PropertyRef Name="MaQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanQuyen__UserI__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PhanQuyenTaiKhoan" Type="Self.PhanQuyenTaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhanQuyenTaiKhoan">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Project_62130516Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BangDiems" EntityType="Self.BangDiem" />
+          <EntitySet Name="GiangViens" EntityType="Self.GiangVien" />
+          <EntitySet Name="HocPhans" EntityType="Self.HocPhan" />
+          <EntitySet Name="Lops" EntityType="Self.Lop" />
+          <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
+          <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyen" />
+          <EntitySet Name="PhanQuyenTaiKhoans" EntityType="Self.PhanQuyenTaiKhoan" />
+          <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__BangDiem__MaMH__49C3F6B7" Association="Self.FK__BangDiem__MaMH__49C3F6B7">
+            <End Role="HocPhan" EntitySet="HocPhans" />
+            <End Role="BangDiem" EntitySet="BangDiems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BangDiem__MaSV__48CFD27E" Association="Self.FK__BangDiem__MaSV__48CFD27E">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="BangDiem" EntitySet="BangDiems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GiangVien__MaGV__46E78A0C" Association="Self.FK__GiangVien__MaGV__46E78A0C">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GiangVien" EntitySet="GiangViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HocPhan__MaGV__4BAC3F29" Association="Self.FK__HocPhan__MaGV__4BAC3F29">
+            <End Role="GiangVien" EntitySet="GiangViens" />
+            <End Role="HocPhan" EntitySet="HocPhans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HocPhan__MaMon__4AB81AF0" Association="Self.FK__HocPhan__MaMon__4AB81AF0">
+            <End Role="MonHoc" EntitySet="MonHocs" />
+            <End Role="HocPhan" EntitySet="HocPhans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SinhVien__MaLop__47DBAE45" Association="Self.FK__SinhVien__MaLop__47DBAE45">
+            <End Role="Lop" EntitySet="Lops" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanQuyen__MaQuy__4D94879B" Association="Self.FK__PhanQuyen__MaQuy__4D94879B">
+            <End Role="PhanQuyen" EntitySet="PhanQuyens" />
+            <End Role="PhanQuyenTaiKhoan" EntitySet="PhanQuyenTaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanQuyen__UserI__4CA06362" Association="Self.FK__PhanQuyen__UserI__4CA06362">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PhanQuyenTaiKhoan" EntitySet="PhanQuyenTaiKhoans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Project_62130516ModelStoreContainer" CdmEntityContainer="Project_62130516Entities">
+          <EntitySetMapping Name="BangDiems">
+            <EntityTypeMapping TypeName="Project_62130516Model.BangDiem">
+              <MappingFragment StoreEntitySet="BangDiem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+                <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+                <ScalarProperty Name="DiemQT" ColumnName="DiemQT" />
+                <ScalarProperty Name="DiemThi" ColumnName="DiemThi" />
+                <ScalarProperty Name="DiemTong" ColumnName="DiemTong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiangViens">
+            <EntityTypeMapping TypeName="Project_62130516Model.GiangVien">
+              <MappingFragment StoreEntitySet="GiangVien">
+                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
+                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HocPhans">
+            <EntityTypeMapping TypeName="Project_62130516Model.HocPhan">
+              <MappingFragment StoreEntitySet="HocPhan">
+                <ScalarProperty Name="MaHP" ColumnName="MaHP" />
+                <ScalarProperty Name="MaMon" ColumnName="MaMon" />
+                <ScalarProperty Name="MaGV" ColumnName="MaGV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lops">
+            <EntityTypeMapping TypeName="Project_62130516Model.Lop">
+              <MappingFragment StoreEntitySet="Lop">
+                <ScalarProperty Name="MaLop" ColumnName="MaLop" />
+                <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonHocs">
+            <EntityTypeMapping TypeName="Project_62130516Model.MonHoc">
+              <MappingFragment StoreEntitySet="MonHoc">
+                <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="SoTinChi" ColumnName="SoTinChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanQuyens">
+            <EntityTypeMapping TypeName="Project_62130516Model.PhanQuyen">
+              <MappingFragment StoreEntitySet="PhanQuyen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanQuyenTaiKhoans">
+            <EntityTypeMapping TypeName="Project_62130516Model.PhanQuyenTaiKhoan">
+              <MappingFragment StoreEntitySet="PhanQuyenTaiKhoan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="Project_62130516Model.SinhVien">
+              <MappingFragment StoreEntitySet="SinhVien">
+                <ScalarProperty Name="MaSV" ColumnName="MaSV" />
+                <ScalarProperty Name="TenSV" ColumnName="TenSV" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="MaLop" ColumnName="MaLop" />
+                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Project_62130516Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
