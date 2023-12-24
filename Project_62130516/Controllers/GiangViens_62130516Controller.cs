@@ -18,7 +18,7 @@ namespace Project_62130516.Controllers
         // GET: GiangViens_62130516
         public async Task<ActionResult> Index()
         {
-            var giangViens = db.GiangViens.Include(g => g.User);
+            var giangViens = db.GiangViens.Include(g => g.User).Include(x=>x.HocPhans);
             return View(await giangViens.ToListAsync());
         }
 

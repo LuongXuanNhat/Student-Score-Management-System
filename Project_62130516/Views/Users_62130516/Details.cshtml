@@ -1,14 +1,14 @@
 ﻿@model Project_62130516.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Quản lý người dùng</h2>
 
 <div>
-    <h4>User</h4>
+    <h4>Chi tiết</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,11 +28,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DaXoa)
+            Trạng thái tài khoản
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DaXoa)
+            @if (!Model.DaXoa)
+            {
+                <text>🟢 Đang hoạt động</text>
+            }
+            else
+            {
+                <text>🔴 Đã khóa</text>
+            }
         </dd>
 
         <dt>

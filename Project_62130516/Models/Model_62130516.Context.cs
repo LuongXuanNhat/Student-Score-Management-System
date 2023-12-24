@@ -25,7 +25,6 @@ namespace Project_62130516.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BangDiem> BangDiems { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
         public virtual DbSet<HocPhan> HocPhans { get; set; }
         public virtual DbSet<Lop> Lops { get; set; }
@@ -34,5 +33,6 @@ namespace Project_62130516.Models
         public virtual DbSet<PhanQuyenTaiKhoan> PhanQuyenTaiKhoans { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<BangDiem> BangDiems { get; set; }
     }
 }

@@ -53,9 +53,11 @@ namespace Project_62130516.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,MaSV,MaMH,DiemQT,DiemThi")] BangDiem bangDiem)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
             if (ModelState.IsValid)
             {
-                bangDiem.DiemTong = 1.0*(bangDiem.DiemQT * 0.5 + bangDiem.DiemThi * 0.5);
+                bangDiem.DiemTong = bangDiem.DiemQT.Value * 0.5m + bangDiem.DiemThi.Value * 0.5m;
                 bangDiem.Id = Guid.NewGuid();
                 db.BangDiems.Add(bangDiem);
                 await db.SaveChangesAsync();
@@ -79,8 +81,8 @@ namespace Project_62130516.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaMH = new SelectList(db.HocPhans, "MaHP", "MaMon", bangDiem.MaMH);
-            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "TenSV", bangDiem.MaSV);
+            ViewBag.MaMH = new SelectList(db.HocPhans, "MaHP", "MaHP", bangDiem.MaMH);
+            ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "MaSV", bangDiem.MaSV);
             return View(bangDiem);
         }
 

@@ -25,10 +25,10 @@
             Ngày sinh
         </th>
         <th>
-            Trạng thái tài khoản
+            Tên đăng nhập
         </th>
         <th>
-            Tên đăng nhập
+            Số học phần phụ trách
         </th>
         <th></th>
     </tr>
@@ -48,17 +48,10 @@
             @Html.DisplayFor(modelItem => item.DateOfBirth)
         </td>
         <td>
-            @if (!item.DaXoa)
-            {
-                <text>🟢 Đang hoạt động</text>
-            }
-            else
-            {
-                <text>🔴 Đã khóa</text>
-            }
+            @Html.DisplayFor(modelItem => item.User.TenDangNhap)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.TenDangNhap)
+            @Html.DisplayFor(modelItem => item.HocPhans.Count)
         </td>
         <td>
             @Html.ActionLink("Sửa", "Edit", new { id = item.MaGV }) |

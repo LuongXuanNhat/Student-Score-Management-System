@@ -30,7 +30,7 @@ namespace Project_62130516.Controllers
                         var role = roles.FirstOrDefault(x => x.Id == pq.MaQuyen);
                         if (role != null)
                         {
-                            item. += role.TenQuyen;
+                            item.TenQuyen += role.TenQuyen;
                         }
                     }
                 }
