@@ -12,20 +12,35 @@ using System.Globalization;
 
 namespace Project_62130516.Controllers
 {
-    public class BangDiems_62130516Controller : Controller
+    public class BangDiems_62130516Controller : Base_62130516Controller
     {
         private Project_62130516Entities db = new Project_62130516Entities();
 
         // GET: BangDiems_62130516
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string keyWord = null)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             var bangDiems = db.BangDiems.Include(b => b.HocPhan).Include(b => b.SinhVien);
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                bangDiems = bangDiems
+                    .Where(b => b.MaSV.Contains(keyWord) || b.MaMH.Contains(keyWord) || b.SinhVien.Lop.TenLop.Contains(keyWord));
+            }
             return View(await bangDiems.ToListAsync());
         }
 
         // GET: BangDiems_62130516/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,6 +56,11 @@ namespace Project_62130516.Controllers
         // GET: BangDiems_62130516/Create
         public ActionResult Create()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             ViewBag.MaMH = new SelectList(db.HocPhans, "MaHP", "MaHP");
             ViewBag.MaSV = new SelectList(db.SinhViens, "MaSV", "MaSV");
             return View();
@@ -51,13 +71,11 @@ namespace Project_62130516.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,MaSV,MaMH,DiemQT,DiemThi")] BangDiem bangDiem)
+        public async Task<ActionResult> Create(BangDiem bangDiem)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-
             if (ModelState.IsValid)
             {
-                bangDiem.DiemTong = bangDiem.DiemQT.Value * 0.5m + bangDiem.DiemThi.Value * 0.5m;
+                bangDiem.DiemTong = bangDiem.DiemQT * 0.5m + bangDiem.DiemThi * 0.5m;
                 bangDiem.Id = Guid.NewGuid();
                 db.BangDiems.Add(bangDiem);
                 await db.SaveChangesAsync();
@@ -72,6 +90,11 @@ namespace Project_62130516.Controllers
         // GET: BangDiems_62130516/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -91,10 +114,11 @@ namespace Project_62130516.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,MaSV,MaMH,DiemQT,DiemThi")] BangDiem bangDiem)
+        public async Task<ActionResult> Edit(BangDiem bangDiem)
         {
             if (ModelState.IsValid)
             {
+                bangDiem.DiemTong = bangDiem.DiemQT * 0.5m + bangDiem.DiemThi * 0.5m;
                 db.Entry(bangDiem).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -107,6 +131,11 @@ namespace Project_62130516.Controllers
         // GET: BangDiems_62130516/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

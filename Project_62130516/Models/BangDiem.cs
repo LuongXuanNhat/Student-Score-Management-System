@@ -22,11 +22,11 @@ namespace Project_62130516.Models
         [Display(Name = "Mã môn học")]
         public string MaMH { get; set; }
         [Display(Name = "Điểm quá trình")]
-        public Nullable<decimal> DiemQT { get; set; }
+        public decimal DiemQT { get; set; }
         [Display(Name = "Điểm thi")]
-        public Nullable<decimal> DiemThi { get; set; }
+        public decimal DiemThi { get; set; }
         [Display(Name = "Điểm tổng")]
-        public Nullable<decimal> DiemTong { get; set; }
+        public decimal DiemTong { get; set; }
     
         public virtual HocPhan HocPhan { get; set; }
         public virtual SinhVien SinhVien { get; set; }

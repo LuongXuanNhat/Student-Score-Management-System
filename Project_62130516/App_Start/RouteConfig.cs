@@ -16,7 +16,7 @@ namespace Project_62130516
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "BangDiems_62130516", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Account_62130516", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

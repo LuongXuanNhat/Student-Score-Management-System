@@ -129,7 +129,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Account_62130516Controller.cs" />
     <Compile Include="Controllers\BangDiems_62130516Controller.cs" />
+    <Compile Include="Controllers\Base_62130516Controller.cs" />
     <Compile Include="Controllers\GiangViens_62130516Controller.cs" />
     <Compile Include="Controllers\HocPhans_62130516Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -293,9 +295,12 @@
     <Content Include="Views\BangDiems_62130516\Details.cshtml" />
     <Content Include="Views\BangDiems_62130516\Edit.cshtml" />
     <Content Include="Views\BangDiems_62130516\Index.cshtml" />
+    <Content Include="Views\Account_62130516\Register.cshtml" />
+    <Content Include="Views\Account_62130516\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base_62130516\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

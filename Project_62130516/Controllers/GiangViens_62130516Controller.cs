@@ -11,13 +11,18 @@ using Project_62130516.Models;
 
 namespace Project_62130516.Controllers
 {
-    public class GiangViens_62130516Controller : Controller
+    public class GiangViens_62130516Controller : Base_62130516Controller
     {
         private Project_62130516Entities db = new Project_62130516Entities();
 
         // GET: GiangViens_62130516
         public async Task<ActionResult> Index()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             var giangViens = db.GiangViens.Include(g => g.User).Include(x=>x.HocPhans);
             return View(await giangViens.ToListAsync());
         }
@@ -25,6 +30,11 @@ namespace Project_62130516.Controllers
         // GET: GiangViens_62130516/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,6 +50,11 @@ namespace Project_62130516.Controllers
         // GET: GiangViens_62130516/Create
         public ActionResult Create()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             var magv = db.Users.Include(x => x.PhanQuyenTaiKhoans);
             var roleAmin = db.PhanQuyens.FirstOrDefault(x=>x.TenQuyen.ToLower().Equals("admin"));
             magv = magv.Where(x => x.PhanQuyenTaiKhoans.Any(y=> y.MaQuyen != roleAmin.Id));
@@ -69,6 +84,11 @@ namespace Project_62130516.Controllers
         // GET: GiangViens_62130516/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -119,6 +139,11 @@ namespace Project_62130516.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             GiangVien giangVien = await db.GiangViens.FindAsync(id);
             db.GiangViens.Remove(giangVien);
             await db.SaveChangesAsync();

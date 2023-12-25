@@ -19,7 +19,7 @@ namespace Project_62130516.Models
         [Display(Name = "Id người dùng")]
         public string UserId { get; set; }
         [Display(Name = "Mã quyền")]
-        public Nullable<System.Guid> MaQuyen { get; set; }
+        public Guid MaQuyen { get; set; }
     
         public virtual PhanQuyen PhanQuyen { get; set; }
         public virtual User User { get; set; }

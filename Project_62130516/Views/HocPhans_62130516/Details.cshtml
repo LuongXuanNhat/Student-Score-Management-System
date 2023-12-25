@@ -1,14 +1,14 @@
 ﻿@model Project_62130516.Models.HocPhan
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết học phần";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Quản lý học phần</h2>
 
 <div>
-    <h4>HocPhan</h4>
+    <h4>Chi tiết học phần</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -30,6 +30,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaHP }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaHP }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>

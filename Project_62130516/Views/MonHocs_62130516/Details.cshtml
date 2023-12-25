@@ -1,14 +1,14 @@
 ﻿@model Project_62130516.Models.MonHoc
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết môn học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Quản lý môn học</h2>
 
 <div>
-    <h4>MonHoc</h4>
+    <h4>Chi tiết môn học</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -30,6 +30,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaMH }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaMH }) |
+    @Html.ActionLink("Trở về", "Index")
 </p>

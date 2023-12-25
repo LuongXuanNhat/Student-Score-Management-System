@@ -30,9 +30,17 @@
             @Html.DisplayFor(modelItem => item.SoTinChi)
         </td>
         <td>
-            @Html.ActionLink("Sửa", "Edit", new { id = item.MaMH }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaMH }) |
-            @Html.ActionLink("Xóa", "Delete", new { id = item.MaMH })
+            <button class="btn btn-warning">
+                <a class="text-white text-decoration-none" href="@Url.Action("Edit", new { id = item.MaMH })">Sửa</a>
+            </button>
+            |
+            <button class="btn btn-info">
+                <a class="text-white text-decoration-none" href="@Url.Action("Details", new { id = item.MaMH })">Chi tiết</a>
+            </button>
+            |
+            <button class="btn btn-danger">
+                <a class="text-white text-decoration-none" href="@Url.Action("Delete", new { id = item.MaMH })">Xóa</a>
+            </button>
         </td>
     </tr>
 }

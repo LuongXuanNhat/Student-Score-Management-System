@@ -11,13 +11,18 @@ using Project_62130516.Models;
 
 namespace Project_62130516.Controllers
 {
-    public class Users_62130516Controller : Controller
+    public class Users_62130516Controller : Base_62130516Controller
     {
         private Project_62130516Entities db = new Project_62130516Entities();
 
         // GET: Users
         public async Task<ActionResult> Index()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             var users = db.Users.Include(u => u.GiangVien).Include(x=>x.PhanQuyenTaiKhoans);
             var roles = await db.PhanQuyens.ToListAsync();
 
@@ -41,6 +46,11 @@ namespace Project_62130516.Controllers
         // GET: Users/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -56,6 +66,11 @@ namespace Project_62130516.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             ViewBag.Id = new SelectList(db.GiangViens, "MaGV", "TenGV");
             return View();
         }
@@ -66,9 +81,22 @@ namespace Project_62130516.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,TenDangNhap,MatKhau,DaXoa")] User user)
-        {
+        { 
             if (ModelState.IsValid)
             {
+                var users = await db.Users.ToListAsync();
+                var checkTenDanghap = users.FirstOrDefault(x => x.TenDangNhap.Equals(user.TenDangNhap));
+                if (checkTenDanghap != null)
+                {
+                    ViewBag.ErrorMessage = "Tên đăng nhập bị trùng! Hãy nhập một giá trị khác";
+                    return View();
+                }
+                var checkUserId = users.FirstOrDefault(x => x.Id.Equals(user.Id));
+                if (checkUserId != null)
+                {
+                    ViewBag.ErrorMessage = "Mã người dùng bị trùng! Hãy nhập một giá trị khác";
+                    return View();
+                }
                 db.Users.Add(user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -81,6 +109,11 @@ namespace Project_62130516.Controllers
         // GET: Users/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,7 +138,20 @@ namespace Project_62130516.Controllers
         {
             if (ModelState.IsValid)
             {
+                var users = await db.Users.ToListAsync();
+                var checkTenDanghap = users.FirstOrDefault(x => x.TenDangNhap.Equals(user.TenDangNhap));
+                if (checkTenDanghap != null)
+                {
+                    ViewBag.ErrorMessage = "Tên đăng nhập bị trùng! Hãy nhập một giá trị khác";
+                    return View();
+                }
+
                 string maQuyen = form["TenQuyen"];
+                if(maQuyen == null)
+                {
+                    ViewBag.ErrorMessage = "Quyền bị trống! Hãy nhập một giá trị khác";
+                    return View();
+                }
                 var userRole = new PhanQuyenTaiKhoan()
                 {
                     Id = Guid.NewGuid(),
@@ -125,6 +171,11 @@ namespace Project_62130516.Controllers
         // GET: Users/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

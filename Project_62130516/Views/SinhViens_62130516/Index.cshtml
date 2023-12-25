@@ -54,9 +54,17 @@
             @Html.DisplayFor(modelItem => item.BangDiems.Count)
         </td>
         <td>
-            @Html.ActionLink("Sửa", "Edit", new { id = item.MaSV }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSV }) |
-            @Html.ActionLink("Xóa", "Delete", new { id = item.MaSV })
+            <button class="btn btn-warning">
+                <a class="text-white text-decoration-none" href="@Url.Action("Edit", new { id = item.MaSV })">Sửa</a>
+            </button>
+            |
+            <button class="btn btn-info">
+                <a class="text-white text-decoration-none" href="@Url.Action("Details", new { id = item.MaSV })">Chi tiết</a>
+            </button>
+            |
+            <button class="btn btn-danger">
+                <a class="text-white text-decoration-none" href="@Url.Action("Delete", new { id = item.MaSV })">Xóa</a>
+            </button>
         </td>
     </tr>
 }

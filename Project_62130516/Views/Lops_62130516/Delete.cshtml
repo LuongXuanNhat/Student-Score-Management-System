@@ -1,15 +1,15 @@
 ﻿@model Project_62130516.Models.Lop
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa lớp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Quản lý lớp học</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc chắn muốn xóa không? Hãy cân nhắc lại</h3>
 <div>
-    <h4>Lop</h4>
+    <h4>Xóa lớp học</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,8 +26,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "Index")
         </div>
     }
 </div>

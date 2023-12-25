@@ -29,7 +29,7 @@ namespace Project_62130516.Models
         [Display(Name = "Trạng thái tài khoản")]
         public bool DaXoa { get; set; }
         [Display(Name = "Tên quyền")]
-        public string TenQuyen;
+        public string TenQuyen ;
         public virtual GiangVien GiangVien { get; set; }
         public virtual ICollection<PhanQuyenTaiKhoan> PhanQuyenTaiKhoans { get; set; }
     }

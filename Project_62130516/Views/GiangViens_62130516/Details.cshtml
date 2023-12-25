@@ -1,14 +1,14 @@
 ﻿@model Project_62130516.Models.GiangVien
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết giảng viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Quản lý giảng viên</h2>
 
 <div>
-    <h4>GiangVien</h4>
+    <h4>Chi tiết giảng viên</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -44,14 +44,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DaXoa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DaXoa)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.User.TenDangNhap)
         </dt>
 
@@ -62,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaGV }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaGV }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>

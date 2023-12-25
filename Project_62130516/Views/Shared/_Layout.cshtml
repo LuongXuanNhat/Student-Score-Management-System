@@ -19,13 +19,25 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Tài khoản", "Index", "Users_62130516", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Phân quyền", "Index", "PhanQuyens_62130516", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Môn học", "Index", "MonHocs_62130516", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Lớp", "Index", "Lops_62130516", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Học phần", "Index", "HocPhans_62130516", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Giảng viên", "Index", "GiangViens_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["Role"] != null && Session["Role"].ToString().ToLower() == "admin")
+                    {
+                        <li>@Html.ActionLink("Tài khoản", "Index", "Users_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Phân quyền", "Index", "PhanQuyens_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Môn học", "Index", "MonHocs_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Lớp", "Index", "Lops_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Học phần", "Index", "HocPhans_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Giảng viên", "Index", "GiangViens_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
                     <li>@Html.ActionLink("Sinh viên", "Index", "SinhViens_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["UserId"] != null)
+                    {
+                        <li style="margin-left: auto">@Html.ActionLink("Đăng xuất", "Logout", "Account_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+                        <li style="margin-left: auto">@Html.ActionLink("Đăng nhập", "Login", "Account_62130516", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>

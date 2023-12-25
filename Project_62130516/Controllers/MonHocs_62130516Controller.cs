@@ -11,19 +11,29 @@ using Project_62130516.Models;
 
 namespace Project_62130516.Controllers
 {
-    public class MonHocs_62130516Controller : Controller
+    public class MonHocs_62130516Controller : Base_62130516Controller
     {
         private Project_62130516Entities db = new Project_62130516Entities();
 
         // GET: MonHocs_62130516
         public async Task<ActionResult> Index()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             return View(await db.MonHocs.ToListAsync());
         }
 
         // GET: MonHocs_62130516/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +49,11 @@ namespace Project_62130516.Controllers
         // GET: MonHocs_62130516/Create
         public ActionResult Create()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             return View();
         }
 
@@ -62,6 +77,11 @@ namespace Project_62130516.Controllers
         // GET: MonHocs_62130516/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -93,6 +113,11 @@ namespace Project_62130516.Controllers
         // GET: MonHocs_62130516/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -37,7 +37,7 @@ namespace Project_62130516.Models
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Trạng thái")]
-        public bool DaXoa { get; set; }
+        public Nullable<bool> DaXoa { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<HocPhan> HocPhans { get; set; }

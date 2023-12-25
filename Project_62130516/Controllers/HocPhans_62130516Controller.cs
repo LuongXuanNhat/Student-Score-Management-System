@@ -11,13 +11,18 @@ using Project_62130516.Models;
 
 namespace Project_62130516.Controllers
 {
-    public class HocPhans_62130516Controller : Controller
+    public class HocPhans_62130516Controller : Base_62130516Controller
     {
         private Project_62130516Entities db = new Project_62130516Entities();
 
         // GET: HocPhans_62130516
         public async Task<ActionResult> Index()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             var hocPhans = db.HocPhans.Include(h => h.GiangVien).Include(h => h.MonHoc).Include(x=>x.BangDiems);
             return View(await hocPhans.ToListAsync());
         }
@@ -25,6 +30,11 @@ namespace Project_62130516.Controllers
         // GET: HocPhans_62130516/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,6 +50,11 @@ namespace Project_62130516.Controllers
         // GET: HocPhans_62130516/Create
         public ActionResult Create()
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             ViewBag.MaGV = new SelectList(db.GiangViens, "MaGV", "TenGV");
             ViewBag.MaMon = new SelectList(db.MonHocs, "MaMH", "TenMon");
             return View();
@@ -67,6 +82,11 @@ namespace Project_62130516.Controllers
         // GET: HocPhans_62130516/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -102,6 +122,11 @@ namespace Project_62130516.Controllers
         // GET: HocPhans_62130516/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
+            if (_CurrentUserId == null)
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return RedirectToAction("Login", "Account_62130516");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

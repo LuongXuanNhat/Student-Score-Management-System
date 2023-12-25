@@ -1,11 +1,11 @@
 ﻿@model Project_62130516.Models.User
 
 @{
-    ViewBag.Title = "Tạo tài khoản";
+    ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Quản lý người dùng</h2>
+<h2>Đăng nhập hệ thống</h2>
 
 
 @using (Html.BeginForm()) 
@@ -13,22 +13,15 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Tạo tài khoản người dùng</h4>
+        <h4>Đăng nhập tài khoản của bạn để bắt đầu quản lý điểm sinh viên</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="text-danger">
             @ViewBag.ErrorMessage
         </div>
         <div class="form-group">
-            @Html.Label("Mã Tài Khoản", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Tên đăng nhập", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TenDangNhap, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
@@ -36,23 +29,23 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Tạo mật khẩu", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new {type="password", @class = "form-control" } })
+                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { type = "password", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tạo" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10 mt-2">
+                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Trở về", "Index")
+    @Html.ActionLink("Đăng ký", "Register")
 </div>
 
 @section Scripts {

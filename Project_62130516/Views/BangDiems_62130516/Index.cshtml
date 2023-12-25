@@ -5,10 +5,25 @@
 }
 
 
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        @* Tìm kiếm ở đây *@
+        <form action="@Url.Action("Index")" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="keyWord" placeholder="Tìm kiếm..." value="@Request.QueryString["keyWord"]" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Tìm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <button class=" btn btn-primary text-white">
+            <a class="text-white text-decoration-none" href="@Url.Action("Create")">Nhập điểm</a>
+        </button>
+    </div>
+</div>
 
-<button class="float-end btn btn-primary text-white">
-    <a class="text-white text-decoration-none" href="@Url.Action("Create")">Nhập điểm</a>
-</button>
 <table class="table">
     <tr>
         <th>
@@ -63,7 +78,7 @@
                 @Html.DisplayFor(modelItem => item.DiemThi)
             </td>
             <td>
-                @string.Format("{0:n0}", item.DiemTong)
+                @Html.DisplayFor(modelItem => item.DiemTong)
             </td>
 
 

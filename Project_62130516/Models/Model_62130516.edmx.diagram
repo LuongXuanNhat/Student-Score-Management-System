@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="939abf1276ed4c4db02b297e3a527f65" Name="Diagram1">
+      <Diagram DiagramId="939abf1276ed4c4db02b297e3a527f65" Name="Diagram1" ZoomLevel="104">
         <EntityTypeShape EntityType="Project_62130516Model.GiangVien" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_62130516Model.HocPhan" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_62130516Model.Lop" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_62130516Model.MonHoc" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_62130516Model.HocPhan" Width="1.5" PointX="5.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_62130516Model.Lop" Width="1.5" PointX="10" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_62130516Model.MonHoc" Width="1.5" PointX="5.625" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Project_62130516Model.PhanQuyen" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Project_62130516Model.PhanQuyenTaiKhoan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_62130516Model.SinhVien" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_62130516Model.SinhVien" Width="1.5" PointX="10" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Project_62130516Model.User" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <AssociationConnector Association="Project_62130516Model.FK__GiangVien__MaGV__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="Project_62130516Model.FK__HocPhan__MaGV__4BAC3F29" ManuallyRouted="false" />
@@ -19,7 +19,7 @@
         <AssociationConnector Association="Project_62130516Model.FK__SinhVien__MaLop__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="Project_62130516Model.FK__PhanQuyen__MaQuy__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="Project_62130516Model.FK__PhanQuyen__UserI__4CA06362" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Project_62130516Model.BangDiem" Width="1.5" PointX="7.5" PointY="7.125" />
+        <EntityTypeShape EntityType="Project_62130516Model.BangDiem" Width="1.5" PointX="7.5" PointY="1.5" />
         <AssociationConnector Association="Project_62130516Model.FK__BangDiem__MaMH__534D60F1" />
         <AssociationConnector Association="Project_62130516Model.FK__BangDiem__MaSV__52593CB8" />
       </Diagram>

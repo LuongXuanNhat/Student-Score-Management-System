@@ -1,14 +1,14 @@
 ﻿@model Project_62130516.Models.PhanQuyen
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết quyền";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Quản lý phân quyền</h2>
 
 <div>
-    <h4>PhanQuyen</h4>
+    <h4>Chi tiết</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,6 +22,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Trở về", "Index")
 </p>
